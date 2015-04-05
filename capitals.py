@@ -8,6 +8,9 @@ from classes import Population
 from crossings import *
 import distances
 from copy import deepcopy
+from mpl_toolkits.basemap import Basemap
+import matplotlib.pyplot as plt
+import numpy as np
 
 continent = 'Europe'
 
@@ -45,3 +48,18 @@ for g in range(generations):
     paths.individuals = deepcopy(newPaths)
     paths.evaluate(distance, lookupTable)
     #paths.plot2D(lookupTable, g)
+
+# Map the points
+bestPath = paths.individuals[0].values
+lat = [lookupTable[point][0] for point in bestPath] 
+lon = [lookupTable[point][1] for point in bestPath]
+
+map = Basemap(projection='ortho', lat_0 = max(lat)-10, lon_0 = min(lon)-10)
+map.drawcoastlines()
+map.drawcountries()
+map.fillcontinents(color='lightblue')
+map.drawmapboundary() 
+x, y = map(lat, lon)
+map.plot(x, y, 'ro', markersize=6)
+map.plot(x, y, c='red')
+##plt.show()

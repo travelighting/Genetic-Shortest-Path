@@ -28,12 +28,6 @@ class Individual:
                 self.fitness += distance
                 distances[key] = distance
                 
-
-        # Without memoization
-##        self.fitness = np.sum((fitnessFunction(lookupTable[self.values[i]],
-##                                               lookupTable[self.values[i + 1]])
-##                               for i in range(len(self.values) - 1)))
-
 # List of paths
 class Population:
     
@@ -73,16 +67,11 @@ class Population:
         assert len(lookupTable[self.individuals[0].values[0]]) == 2, 'Data points are not of dimension 2.'
         x = []
         y = []
-
-        '''TO DO'''
-        labels = []
-        
         fig, = plt.plot([], [])
         # Extract the order of points of the best individual
         for point in self.individuals[0].values:
             x.append(lookupTable[point][0])
             y.append(lookupTable[point][1])
-            labels.append(point)
         # Cleer the plot
         plt.clf()
         plt.scatter(x, y, alpha=0.5)
@@ -95,4 +84,3 @@ class Population:
         
     def plot3D(self, lookupTable):
         assert len(lookupTable[self.individuals[0]]) == 3, 'Data points are not of dimension 3.'
-        
