@@ -1,11 +1,6 @@
-import sys, os
-projectpath = os.path.dirname(os.path.realpath('Crossings.py'))
-libpath = projectpath + '/lib'
-sys.path.append(libpath)
-os.chdir(projectpath)
+from lib.classes import Population
+from lib.crossings import *
 import pandas as pd
-from classes import Population
-from crossings import *
 import distances
 from copy import deepcopy
 
@@ -36,7 +31,7 @@ for g in range(generations):
         # Create 6 offsprings with a single shuffle of maximal size 10
         for _ in range(6):
             newPaths.append(shufflePath(deepcopy(path), 10))
-    # Replace the old population with the new population of offspring
+    # Replace the old population with the new population of offsprings
     paths.individuals = deepcopy(newPaths)
     paths.evaluate(distance, lookupTable)
     paths.plot2D(lookupTable, g)

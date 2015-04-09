@@ -1,5 +1,4 @@
 import numpy.random as rand
-import numpy as np
 import linechart
 import matplotlib.pyplot as plt
 import sys
@@ -39,21 +38,12 @@ class Population:
         
     # Sort population according to their fitness
     def sort(self):
-        # Bubble sort from worst to best
-        sorted = False
-        while sorted == False:
-            sorted = True
-            for i in range(len(self.individuals) - 1):
-                indiOne = self.individuals[i]
-                indiTwo = self.individuals[i + 1]
-                if indiOne.fitness > indiTwo.fitness:
-                    self.individuals[i], self.individuals[i + 1] = indiTwo, indiOne
-                    sorted = False
+        self.individuals = sorted(self.individuals, key=lambda indi: indi.fitness)
                     
     def evaluate(self, fitnessFunction, lookupTable):
         # Objective fitness
-        for i in range(len(self.individuals)):
-            self.individuals[i].evaluate(fitnessFunction, lookupTable)
+        for indi in self.individuals:
+            indi.evaluate(fitnessFunction, lookupTable)
         # Sort population
         self.sort()
 

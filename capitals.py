@@ -35,6 +35,7 @@ paths.evaluate(distance, lookupTable)
 for g in range(generations):
     # Generate offsprings
     newPaths = []
+    # Go through top 10 paths
     for path in paths.individuals[:10]:
         # Create 1 exact copy of each top 10 paths
         newPaths.append(deepcopy(path))
@@ -44,7 +45,7 @@ for g in range(generations):
         # Create 6 offsprings with a single shuffle of maximal size 20
         for _ in range(6):
             newPaths.append(shufflePath(deepcopy(path), 20))
-    # Replace the old population with the new population of offspring
+    # Replace the old population with the new population of offsprings
     paths.individuals = deepcopy(newPaths)
     paths.evaluate(distance, lookupTable)
     #paths.plot2D(lookupTable, g)
