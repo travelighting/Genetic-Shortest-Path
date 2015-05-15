@@ -8,13 +8,23 @@ from mutations import *
 import pandas as pd
 import distances
 from copy import deepcopy
-from pylab import savefig
+
+# Create a grid
+n = 5
+df = pd.DataFrame()
+x = []
+y = []
+for i in range(n):
+    for j in range(n):
+        x.append(i)
+        y.append(j)
+df['X'] = x
+df['Y'] = y
 
 # Create the lookup table
-df = pd.read_csv('data/wheres-waldo.csv')
 lookupTable = {}
 for i, record in df.iterrows():
-    key = str(record['Book']) + '_' + str(record['Page'])
+    key = i
     lookupTable[key] = (record['X'], record['Y'])
 
 # Parameters
@@ -41,6 +51,3 @@ for g in range(generations):
     paths.individuals = deepcopy(newPaths)
     paths.evaluate(distance, lookupTable)
     paths.plot2D(lookupTable, g)
-    #savefig('gif/{0}'.format(g))
-
-

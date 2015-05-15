@@ -1,8 +1,7 @@
 import numpy as np
 from copy import deepcopy
 
-# Support any number of dimensions is the moto
-
+# Support any number of dimensions
 def euclidian(p1, p2):
     return np.sqrt(np.sum(((p1[i] - p2[i]) ** 2 for i in range(len(p1)))))
 

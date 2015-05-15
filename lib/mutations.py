@@ -29,3 +29,17 @@ def shufflePath(path, size):
     # Insert subset
     path.values = deepcopy(path.values[:insert]) + deepcopy(subset) + deepcopy(path.values[insert:])
     return deepcopy(path)
+
+''' Not sure about this '''
+def tidy(path, fitnessFunction, lookupTable):
+    # For every point of a path
+    for i in range(1, len(path.values)):
+        # Store the current distance
+        oldDistance = path.fitness
+        # Switch over two consecutive points
+        path.values[i-1], path.values[i] = path.values[i], path.values[i-1]
+        # Evaluate the new distance
+        path.evaluate(fitnessFunction, lookupTable)
+        # If the old distance is better revert the change
+        if path.fitness > oldDistance:
+            path.values[i-1], path.values[i] = path.values[i], path.values[i-1]

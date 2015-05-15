@@ -1,7 +1,8 @@
 import numpy.random as rand
 import linechart
 import matplotlib.pyplot as plt
-import sys
+
+plt.style.use('ggplot')
 
 # Save the distances to reduce calculations
 distances = {}
@@ -19,12 +20,15 @@ class Individual:
         self.fitness = 0
         for i in range(len(self.values) - 1):
             key = str(self.values[i]) + '-' + str(self.values[i + 1])
+            # Check if the distance was already calculated
             if key in distances.keys():
                 self.fitness += distances[key]
+            # Else calculate it
             else:
                 distance = fitnessFunction(lookupTable[self.values[i]],
                                                lookupTable[self.values[i + 1]])
                 self.fitness += distance
+                # Store the distance
                 distances[key] = distance
                 
 # List of paths
@@ -62,7 +66,7 @@ class Population:
         for point in self.individuals[0].values:
             x.append(lookupTable[point][0])
             y.append(lookupTable[point][1])
-        # Cleer the plot
+        # Clear the plot
         plt.clf()
         plt.scatter(x, y, alpha=0.5)
         # Join points

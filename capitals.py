@@ -5,7 +5,7 @@ sys.path.append(libpath)
 os.chdir(projectpath)
 import pandas as pd
 from classes import Population
-from crossings import *
+from mutations import *
 import distances
 from copy import deepcopy
 from mpl_toolkits.basemap import Basemap
