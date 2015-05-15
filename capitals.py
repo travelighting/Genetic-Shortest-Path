@@ -25,7 +25,7 @@ for i, record in df.iterrows():
     lookupTable[key] = (record['CapitalLongitude'], record['CapitalLatitude'])
 
 # Parameters
-generations = 1000
+generations = 100
 distance = distances.euclidian
 
 # Initialize a population
@@ -48,19 +48,18 @@ for g in range(generations):
     # Replace the old population with the new population of offsprings
     paths.individuals = deepcopy(newPaths)
     paths.evaluate(distance, lookupTable)
-    #paths.plot2D(lookupTable, g)
 
 # Map the points
 bestPath = paths.individuals[0].values
-lat = [lookupTable[point][0] for point in bestPath] 
+lat = [lookupTable[point][0] for point in bestPath]
 lon = [lookupTable[point][1] for point in bestPath]
 
 map = Basemap(projection='ortho', lat_0 = max(lat)-10, lon_0 = min(lon)-10)
 map.drawcoastlines()
 map.drawcountries()
 map.fillcontinents(color='lightblue')
-map.drawmapboundary() 
+map.drawmapboundary()
 x, y = map(lat, lon)
 map.plot(x, y, 'ro', markersize=6)
 map.plot(x, y, c='red')
-##plt.show()
+plt.show()
